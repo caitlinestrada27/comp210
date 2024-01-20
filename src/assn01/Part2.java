@@ -6,6 +6,7 @@ public class Part2 {
     }
 
     public static void method2(){
+        // int n2 = 0xABC
     }
 
     public static void method3(){
