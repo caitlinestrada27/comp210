@@ -6,24 +6,28 @@ public class JavaWarmUp {
 
         String[] categoriesList = {"phone", "laptop", "smart_watch"};
 
-        int n = s.nextInt();
-        // Date Time1 Category Fee Quantity Time2 AsmCost
+        int n = s.nextInt(); // how many items will be entered into the database
+        // Date Time1 Category Fee Quantity Time2 AsmCost inputs
 
-        // create corresponding size arrays
-        String date[] = new String[n];
-        String time1[] = new String[n];
-        String category[] = new String[n];
-        double fee[] = new double[n];
-        int quantity[] = new int[n];
-        double time2[] = new double[n];
-        double asmCost[] = new double[n];
+        // Create corresponding size arrays
+        String[] date = new String[n];
+        String[] time1 = new String[n];
+        String[] category = new String[n];
+        double[] fee = new double[n];
+        int[] quantity = new int[n];
+        double[] time2 = new double[n];
+        double[] asmCost = new double[n];
 
         // TODO: Fill in the above arrays with data entered from the console.
         for (int i = 0; i < n; i++) {
             date[i] = s.next();
             time1[i] = s.next();
             // TODO fill in the rest here
-
+            category[i] = s.next();
+            fee[i] = s.nextDouble();
+            quantity[i] = s.nextInt();
+            time2[i] = s.nextDouble();
+            asmCost[i] = s.nextDouble();
         }
 
         // Find items with highest and lowest price per unit
@@ -33,7 +37,25 @@ public class JavaWarmUp {
         // TODO: Print items with highest and lowest price per unit.
         // make sure the format is correct!
         // Your code starts here:
+        public int getMaxPriceIndex(int[] fee){
+            int highest_price = 0;
+            for (int i = 0; i < n; i++){
+                if (fee[i] > highest_price){
+                    highest_price = fee[i];
+                }
+            }
+            return highest_price;
+        }
 
+        public int getMinPriceIndex(int[] fee){
+            int lowest_price = fee[0];
+            for (int i = 0; i < n; i++){
+                if (fee[i] < lowest_price){
+                    lowest_price = fee[i];
+                }
+            }
+            return lowest_price;
+        }
         // Your code ends here.
 
         // Calculate the # of batches, total Fee, total Quantity, total Labor and Assembly costs by category.
@@ -49,10 +71,11 @@ public class JavaWarmUp {
             int catIndex = 0;
             // set the value of catIndex for each i to be such that category[i] == categoriesList[catIndex]
             // TODO: Your code for setting catIndex here
-
-            numOfBatchesC[catIndex]++;
+            category[i] = categoriesList[catIndex];
             // TODO: fill in rest of the Category arrays here
-
+            fee[i] = totFeeC[catIndex];
+            quantity[i] = totQuantityC[catIndex];
+            asmCost[i] = toAsmCostC[catIndex];
         }
 
         // TODO: Calculate & Print Category-wise Statistics
