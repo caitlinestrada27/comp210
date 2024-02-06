@@ -37,24 +37,24 @@ public class JavaWarmUp {
         // TODO: Print items with highest and lowest price per unit.
         // make sure the format is correct!
         // Your code starts here:
-        public int getMaxPriceIndex(int[] fee){
-            int highest_price = 0;
+        public int getMaxPriceIndex(int[] input_fee){
+            int highestPrice = 0;
             for (int i = 0; i < n; i++){
-                if (fee[i] > highest_price){
-                    highest_price = fee[i];
+                if (input_fee[i] > highestPrice){
+                    highestPrice = input_fee[i];
                 }
             }
-            return highest_price;
+            return highestPrice;
         }
 
-        public int getMinPriceIndex(int[] fee){
-            int lowest_price = fee[0];
+        public int getMinPriceIndex(int[] input_fee){
+            int lowestPrice = input_fee[0];
             for (int i = 0; i < n; i++){
-                if (fee[i] < lowest_price){
-                    lowest_price = fee[i];
+                if (input_fee[i] < lowestPrice){
+                    lowestPrice = input_fee[i];
                 }
             }
-            return lowest_price;
+            return lowestPrice;
         }
         // Your code ends here.
 
@@ -68,14 +68,21 @@ public class JavaWarmUp {
 
         // TODO: for each item i, incrementally total the values in the above arrays
         for (int i = 0; i < n; i++) {
-            int catIndex = 0;
+            int catIndex = -1;
             // set the value of catIndex for each i to be such that category[i] == categoriesList[catIndex]
             // TODO: Your code for setting catIndex here
-            category[i] = categoriesList[catIndex];
+            for (int j = 0; j < categoriesList.length; j++){
+                if (categoriesList[j].equals(category[i])) {
+                    catIndex = j;
+                    break;
+                }
+            }
             // TODO: fill in rest of the Category arrays here
-            fee[i] = totFeeC[catIndex];
-            quantity[i] = totQuantityC[catIndex];
-            asmCost[i] = toAsmCostC[catIndex];
+            numBatchesC[catIndex]++;
+            toFeeC[catIndex] += (fee[i] * quantity[i]);
+            totQuantityC[catIndex] += quantity[i];
+            totLaborCostC[catIndex] += (time2[i] * 16);
+            totAsmCostC[catIndex] += asmCost[i];
         }
 
         // TODO: Calculate & Print Category-wise Statistics
@@ -83,7 +90,10 @@ public class JavaWarmUp {
             if (numOfBatchesC[j] > 0) {
                 System.out.println( categoriesList[j]);
                 // TODO: print the remaining stats
-
+                System.out.println( toFeeC[j]);
+                System.out.println( totQuantityC[j]);
+                System.out.println( totLaborC[j]);
+                System.out.println( totAsmCostC[j]);
             }
         }
     }
@@ -91,14 +101,30 @@ public class JavaWarmUp {
     // TODO: Find index of item with the highest price per unit.
     static int getMaxPriceIndex(double[] priceT){
         // Your code starts here:
-        return(0); // modify this as well
+        int maxPriceIndex = 0;
+        int maxPrice = 0;
+        for (int i = 0; i < priceT.length; i++){
+            if (priceT[i] > maxPrice){
+                maxPrice = priceT[i].round();
+                maxPriceIndex = i;
+            }
+        }
+        return(maxPriceIndex); // modify this as well
         // Your code ends here.
     }
 
     // TODO: Find index of item with the lowest price per unit.
     static int getMinPriceIndex(double[] priceT){
         // Your code starts here:
-        return(0); // modify this as well
+        int minPriceIndex = 0;
+        int minPrice = 0;
+        for (int i = 0; i < priceT.length; i++){
+            if (priceT[i] < minPrice){
+                minPrice = priceT[i].round();
+                minPriceIndex = i;
+            }
+        }
+        return(minPriceIndex); // modify this as well
         // Your code ends here.
     }
 }
