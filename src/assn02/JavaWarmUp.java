@@ -37,25 +37,15 @@ public class JavaWarmUp {
         // TODO: Print items with highest and lowest price per unit.
         // make sure the format is correct!
         // Your code starts here:
-        public int getMaxPriceIndex(int[] input_fee){
-            int highestPrice = 0;
-            for (int i = 0; i < n; i++){
-                if (input_fee[i] > highestPrice){
-                    highestPrice = input_fee[i];
-                }
-            }
-            return highestPrice;
-        }
+        System.out.println(date[highestItemIndex]);
+        System.out.println(time1[highestItemIndex]);
+        System.out.println(category[highestItemIndex]);
+        System.out.println(fee[highestItemIndex]);
 
-        public int getMinPriceIndex(int[] input_fee){
-            int lowestPrice = input_fee[0];
-            for (int i = 0; i < n; i++){
-                if (input_fee[i] < lowestPrice){
-                    lowestPrice = input_fee[i];
-                }
-            }
-            return lowestPrice;
-        }
+        System.out.println(date[lowestItemIndex]);
+        System.out.println(time1[lowestItemIndex]);
+        System.out.println(category[lowestItemIndex]);
+        System.out.println(fee[lowestItemIndex]);
         // Your code ends here.
 
         // Calculate the # of batches, total Fee, total Quantity, total Labor and Assembly costs by category.
@@ -78,8 +68,8 @@ public class JavaWarmUp {
                 }
             }
             // TODO: fill in rest of the Category arrays here
-            numBatchesC[catIndex]++;
-            toFeeC[catIndex] += (fee[i] * quantity[i]);
+            numOfBatchesC[catIndex]++;
+            totFeeC[catIndex] += (fee[i] * quantity[i]);
             totQuantityC[catIndex] += quantity[i];
             totLaborCostC[catIndex] += (time2[i] * 16);
             totAsmCostC[catIndex] += asmCost[i];
@@ -90,10 +80,9 @@ public class JavaWarmUp {
             if (numOfBatchesC[j] > 0) {
                 System.out.println( categoriesList[j]);
                 // TODO: print the remaining stats
-                System.out.println( toFeeC[j]);
-                System.out.println( totQuantityC[j]);
-                System.out.println( totLaborC[j]);
-                System.out.println( totAsmCostC[j]);
+                System.out.println( totQuantityC[j]); // total number of products assembled
+                System.out.printf("%.2f\n", totFeeC[j] / totQuantityC[j]); // the average assembling fee per unit
+                System.out.printf("%.2f\n", (totFeeC[j] - (totAsmCostC[j] + totLaborCostC[j]))/totQuantityC[j]); // average net profit per unit
             }
         }
     }
@@ -102,10 +91,10 @@ public class JavaWarmUp {
     static int getMaxPriceIndex(double[] priceT){
         // Your code starts here:
         int maxPriceIndex = 0;
-        int maxPrice = 0;
+        double maxPrice = 0;
         for (int i = 0; i < priceT.length; i++){
             if (priceT[i] > maxPrice){
-                maxPrice = priceT[i].round();
+                maxPrice = priceT[i];
                 maxPriceIndex = i;
             }
         }
@@ -117,10 +106,10 @@ public class JavaWarmUp {
     static int getMinPriceIndex(double[] priceT){
         // Your code starts here:
         int minPriceIndex = 0;
-        int minPrice = 0;
+        double minPrice = priceT[0];
         for (int i = 0; i < priceT.length; i++){
             if (priceT[i] < minPrice){
-                minPrice = priceT[i].round();
+                minPrice = priceT[i];
                 minPriceIndex = i;
             }
         }
