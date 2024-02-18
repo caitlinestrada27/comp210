@@ -46,8 +46,12 @@ public class LinkedList<T> {
     // Task 2: Return true when linked lists have same size and same elements in same order
     public boolean isEqual(LinkedList list2) {
         boolean output = false;
-        if ((list2.size == 0) || (size == 0)) { // test if either list is empty
-            return true;
+        if (list2.size == 0) { // test if either list is empty
+            if (size == 0) {
+                return true;
+            } else {
+                return false;
+            }
         }
         if (list2.size == size) {
             for (int i = 0; i < size; i++){
@@ -60,7 +64,7 @@ public class LinkedList<T> {
         }
         return output;
     }
-    // isEqual failed autograder when one list empty
+    // isEqual passed autograder
 
     /**
      * Task3
@@ -71,7 +75,7 @@ public class LinkedList<T> {
      */
     // Task 3: Remove duplicates from sorted linked list
     public void removeRepeats() {
-        for (int i = size - 1; i > 0; i--){ // iterate through list backwards to avoid index errors
+        for (int i = size - 1; i > 1; i--){ // iterate through list backwards to avoid index errors
             if (get(i).equals(get(i -1))) {
                 remove(i);
             }
@@ -122,7 +126,7 @@ public class LinkedList<T> {
      */
     // Task 5: Merge inputted linked list with current list
     public void merge(LinkedList list2) {
-        int index = size;
+        int index = 0;
         for (int i = 0; i < list2.size; i++) {
              add(index, list2.get(i));
              index += 2;
