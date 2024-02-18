@@ -25,6 +25,7 @@ public class LinkedList<T> {
         }
         remove(get(i));
     }
+    // removeAtIndex passed autograder
 
     /**
      * Task2
@@ -45,6 +46,9 @@ public class LinkedList<T> {
     // Task 2: Return true when linked lists have same size and same elements in same order
     public boolean isEqual(LinkedList list2) {
         boolean output = false;
+        if ((list2.size == 0) || (size == 0)) { // test if either list is empty
+            return true;
+        }
         if (list2.size == size) {
             for (int i = 0; i < size; i++){
                 if (list2.get(i).equals(get(i))){
@@ -56,6 +60,8 @@ public class LinkedList<T> {
         }
         return output;
     }
+    // isEqual failed autograder when one list empty
+
     /**
      * Task3
      * Given a sorted linked list, remove the duplicate values from the list
@@ -65,14 +71,13 @@ public class LinkedList<T> {
      */
     // Task 3: Remove duplicates from sorted linked list
     public void removeRepeats() {
-        Object previousItem = get(0);
-        for (int i = 1; i < size; i++){
-            if (previousItem.equals(get(i))){
+        for (int i = size - 1; i > 0; i--){ // iterate through list backwards to avoid index errors
+            if (get(i).equals(get(i -1))) {
                 remove(i);
-                previousItem = get(i);
             }
         }
     }
+    // NullPointerException
 
     /**
      * Task4
@@ -88,11 +93,14 @@ public class LinkedList<T> {
         Node current = head;
         Node next = null;
         while (current != null) {
-            next = current.getNext();
-            previous = current;
-            current = next;
+            next = current.getNext(); // Stores next node
+            current.setNext(previous); // Reverses the pointer
+            previous = current; // Move current to previous node
+            current = next; // Move current node to the next node
         }
+        head = previous; // Update head to point to previous node
     }
+    // reverse passed autograder
 
     /**
      * Task5
@@ -114,11 +122,13 @@ public class LinkedList<T> {
      */
     // Task 5: Merge inputted linked list with current list
     public void merge(LinkedList list2) {
-        for (int i = 0; i < size; i ++) {
-             add(i + 1, list2.get(i));
+        int index = size;
+        for (int i = 0; i < list2.size; i++) {
+             add(index, list2.get(i));
+             index += 2;
         }
     }
-
+    // merge failed autograder when lists were same and different lengths
 
     /* Implementations below are being given to you. Do not modify below this. */
 
