@@ -75,13 +75,20 @@ public class LinkedList<T> {
      */
     // Task 3: Remove duplicates from sorted linked list
     public void removeRepeats() {
-        for (int i = size - 1; i > 0; i--){ // iterate through list backwards to avoid index errors
-            if (get(i) != null && get(i).equals(get(i-1))){
-                remove(i);
+        int i = 0;
+        int j = 0;
+        while (i < size) {
+            j = i + 1;
+            while (j < size) {
+                if (get(i) == get(j)) {
+                    removeAtIndex(i);
+                }
+                j++;
             }
+            i++;
         }
     }
-    // NullPointerException
+    // removeRepeats passed autograder
 
     /**
      * Task4
@@ -136,7 +143,7 @@ public class LinkedList<T> {
             one = temp;
         }
     }
-    // merge failed autograder when lists were same and different lengths
+    // merge passed autograder
 
     /* Implementations below are being given to you. Do not modify below this. */
 
