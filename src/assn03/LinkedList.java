@@ -75,7 +75,7 @@ public class LinkedList<T> {
      */
     // Task 3: Remove duplicates from sorted linked list
     public void removeRepeats() {
-        for (int i = size - 1; i > 0; i--){ // iterate through list backwards to avoid index errors
+        for (int i = size + 1; i > 0; i--){ // iterate through list backwards to avoid index errors
             if (get(i) != null && get(i).equals(get(i-1))){
                 remove(i);
             }
