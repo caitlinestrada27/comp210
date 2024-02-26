@@ -75,8 +75,10 @@ public class LinkedList<T> {
      */
     // Task 3: Remove duplicates from sorted linked list
     public void removeRepeats() {
-        for (int i = size - 1; i > 1; i--){ // iterate through list backwards to avoid index errors
-            if (get(i).equals(get(i -1))) {
+        for (int i = size - 1; i > 0; i--){ // iterate through list backwards to avoid index errors
+            Object obj1 = get(i);
+            Object obj2 = get(i-1);
+            if ((obj1 != null) && (obj2 != null) && (obj1.equals(obj2)){
                 remove(i);
             }
         }
@@ -127,7 +129,7 @@ public class LinkedList<T> {
     // Task 5: Merge inputted linked list with current list
     public void merge(LinkedList list2) {
         int index = 0;
-        for (int i = 0; i < list2.size; i++) {
+        for (int i = 0; i < list2.size(); i++) {
              add(index, list2.get(i));
              index += 2;
         }
