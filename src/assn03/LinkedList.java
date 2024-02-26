@@ -126,10 +126,14 @@ public class LinkedList<T> {
      */
     // Task 5: Merge inputted linked list with current list
     public void merge(LinkedList list2) {
-        int index = 0;
+        Node <T> one = this.getHead();
+        Node <T> two = list2.getHead();
         for (int i = 0; i < list2.size(); i++) {
-             add(index, list2.get(i));
-             index += 2;
+            Node<T> temp = one.getNext();
+            one.setNext(two);
+            two = two.getNext();
+            one.getNext().setNext(temp);
+            one = temp;
         }
     }
     // merge failed autograder when lists were same and different lengths
