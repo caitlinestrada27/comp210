@@ -76,9 +76,7 @@ public class LinkedList<T> {
     // Task 3: Remove duplicates from sorted linked list
     public void removeRepeats() {
         for (int i = size - 1; i > 0; i--){ // iterate through list backwards to avoid index errors
-            Object obj1 = get(i);
-            Object obj2 = get(i-1);
-            if ((obj1 != null) && (obj2 != null) && (obj1.equals(obj2)){
+            if (get(i) != null && get(i).equals(get(i-1))){
                 remove(i);
             }
         }
