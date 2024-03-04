@@ -1,4 +1,6 @@
 package assn04;
+import assn03.Node;
+
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -16,7 +18,20 @@ public class NonEmptyBST<T extends Comparable<T>> implements BST<T> {
 	// TODO: insert
 	@Override
 	public BST<T> insert(T element){
-		return null;
+		// compare
+		if (_element.compareTo(element) == 0) {
+			// create node & insert if empty
+			_element = element;
+		} else if (_element.compareTo(element) == 1) {
+			// insert right if element > root
+			_right = insert(element);
+		} else if (_element.compareTo(element) == -1) {
+			// insert left if element < root
+			_left = insert(element);
+		} else {
+			// end recursive function
+			return null;
+		}
 	}
 	
 	// TODO: remove
