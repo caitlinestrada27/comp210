@@ -19,25 +19,49 @@ public class NonEmptyBST<T extends Comparable<T>> implements BST<T> {
 	@Override
 	public BST<T> insert(T element){
 		// compare
-		if (_element.compareTo(element) == 0) {
-			// create node & insert if empty
-			_element = element;
-		} else if (_element.compareTo(element) == 1) {
-			// insert right if element > root
-			_right = insert(element);
-		} else if (_element.compareTo(element) == -1) {
-			// insert left if element < root
-			_left = insert(element);
-		} else {
-			// end recursive function
-			return null;
+		if (_element.compareTo(element) < 0) {
+			// insert element on right if element > root
+			if (_right.isEmpty()) {
+				NonEmptyBST<T> bst = new NonEmptyBST<>(element);
+				_right = bst;
+			} else {
+				_right.insert(element);
+			}
+		} else if (_element.compareTo(element) > 0) {
+			// insert element on left if element > root
+			if (_left.isEmpty()) {
+				NonEmptyBST<T> bst = new NonEmptyBST<>(element);
+				_left = bst;
+			} else {
+				_left.insert(element);
+			}
 		}
+		return this;
 	}
 	
 	// TODO: remove
 	@Override
 	public BST<T> remove(T element) {
-		return null;
+		if (_element.compareTo(element) < 0) { // right
+			_right = _right.remove(element);
+			return this;
+		}
+		if (_element.compareTo(element) > 0) { // left
+			_left = _left.remove(element);
+			return this;
+		}
+		// at element that we need, = 0
+		if (!_left.isEmpty() && !_right.isEmpty()) { // 1. 2 kids
+			_element = _right.findMin();
+			_right = _right.remove(_element);
+			return this;
+		} else if (!_left.isEmpty() && _right.isEmpty()) { // 2. 1 left
+			return _left;
+		} else if (_left.isEmpty() && !_right.isEmpty()) { // 3. 1 right
+			return _right;
+		} else { // 4. no kids
+			return new EmptyBST<>();
+		}
 	}
 	
 	// TODO: remove all in range (inclusive)
