@@ -67,7 +67,19 @@ public class NonEmptyBST<T extends Comparable<T>> implements BST<T> {
 	// TODO: remove all in range (inclusive)
 	@Override
 	public BST<T> remove_range(T start, T end) {
-		return null;
+		NonEmptyBST<T> output = this;
+		if (!_left.isEmpty()) {
+			_left = _left.remove_range(start, end);
+		}
+		if (!_right.isEmpty()) {
+			_right = _right.remove_range(start, end);
+		}
+
+		if (start.compareTo(_element) <= 0 && end.compareTo(_element) >= 0) {
+			return remove(_element);
+		}
+
+		return this;
     }
 
 	// TODO: printPreOrderTraversal
