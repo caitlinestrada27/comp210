@@ -68,16 +68,22 @@ public class NonEmptyBST<T extends Comparable<T>> implements BST<T> {
 	@Override
 	public BST<T> remove_range(T start, T end) {
 		return null;
-	}
+    }
 
 	// TODO: printPreOrderTraversal
 	@Override
 	public void printPreOrderTraversal() {
+		System.out.print(_element + " ");
+		_left.printPreOrderTraversal();
+		_right.printPreOrderTraversal();
 	}
 
 	// TODO: printPostOrderTraversal
 	@Override
 	public void printPostOrderTraversal() {
+		_left.printPostOrderTraversal();
+		_right.printPostOrderTraversal();
+		System.out.print(_element + " ");
 	}
 
 	// The findMin method returns the minimum value in the tree.
