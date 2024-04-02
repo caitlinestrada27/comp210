@@ -12,8 +12,24 @@ public class SimpleEmergencyRoom {
 
     // TODO (Task 1): dequeue
     public Patient dequeue() {
-    	return null;
-    	}
+        if (patients.isEmpty()) {
+            return null;
+        }
+
+        int highestPriorityIndex = 0;
+
+        for (int i = 1; i < patients.size(); i++) {
+            Patient priority1 = patients.get(i);
+            Patient priority2 = patients.get(highestPriorityIndex);
+
+            if (((priority1.getPriority()).compareTo(priority2.getPriority())) > 0) {
+                highestPriorityIndex = i;
+            }
+        }
+
+        Patient highestPriorityPatient = patients.remove(highestPriorityIndex);
+        return highestPriorityPatient;
+    }
 
     public <V, P> void addPatient(V value, P priority) {
         Patient patient = new Patient(value, (Integer) priority);
@@ -25,8 +41,8 @@ public class SimpleEmergencyRoom {
         patients.add(patient);
     }
 
-    public List getPatients() {
-        return patients;
+    public ArrayList getPatients() {
+        return new ArrayList(patients);
     }
 
     public int size() {

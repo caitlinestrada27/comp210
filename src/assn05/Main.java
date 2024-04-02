@@ -5,22 +5,23 @@ public class Main {
     public static void main(String[] args) {
         testP1();
         testP2();
-//        testP3();
+        testP3();
         testP4();
     }
 
     // test Part 1
     public static void testP1(){
-        /*
-        Part 1 - Write some tests to convince yourself that your code for Part 1 is working
-         */
+       // idk
     }
 
     // test Part 2
     public static void testP2(){
-       /*
-        Part 2 - Write some tests to convince yourself that your code for Part 2 is working
-         */
+       MaxBinHeapER testCase = new MaxBinHeapER<>();
+       testCase.enqueue(3, 50);
+       testCase.enqueue(568310, 21);
+       testCase.enqueue(1234, 33);
+       testCase.enqueue(988123, 500);
+       System.out.println(testCase.getMax());
     }
 
     /*
@@ -39,10 +40,10 @@ public class Main {
     Part 4
      */
     public static void testP4() {
-               /*
-        Part 4 - Write some tests to convince yourself that your code for Part 4 is working
-         */
-
+        double[] test = compareRuntimes();
+        for(int i = 0; i < test.length; i++) {
+            System.out.println(i + ": " + test[i]);
+        }
     }
 
     public static void fillER(MaxBinHeapER complexER) {
@@ -70,14 +71,23 @@ public class Main {
 
         SimpleEmergencyRoom simplePQ = new SimpleEmergencyRoom();
         fillER(simplePQ);
+        long startSimplePQ = System.nanoTime();
+        for (int i = 0; i < 100000; i++) {
+            simplePQ.dequeue();
+        }
+        long endSimplePQ = System.nanoTime();
+        results[0] = endSimplePQ - startSimplePQ;
+        results[1] = results[0] / 100000;
 
-        // Code for (Task 4.1) Here
-
-
-        MaxBinHeapER binHeap = new MaxBinHeapER();
+        MaxBinHeapER binHeap = new MaxBinHeapER<>();
         fillER(binHeap);
-
-        // Code for (Task 4.2) Here
+        long startBinHeap = System.nanoTime();
+        for (int i = 0; i < 100000; i++) {
+            binHeap.dequeue();
+        }
+        long endBinHeap = System.nanoTime();
+        results[2] = endBinHeap - startBinHeap;
+        results[3] = results[2] / 100000;
 
         return results;
     }
