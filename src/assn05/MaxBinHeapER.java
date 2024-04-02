@@ -86,9 +86,8 @@ public class MaxBinHeapER  <V, P extends Comparable<P>> implements BinaryHeap<V,
         }
 
         if (index != -1) {
-            Prioritized<V, P> updatedPatient = _heap.remove(index);
-            updatedPatient = new Patient<>(updatedPatient.getValue(), newPriority); // Create a new patient with updated priority
-            _heap.add(updatedPatient); // Re-insert the patient into the heap
+            Prioritized<V, P> updatedPatient = new Patient<>(value, newPriority); // Create a new patient with updated priority
+            _heap.set(index, updatedPatient); // Re-insert the patient into the heap
             bubbleUp(_heap.size() - 1); // Maintain the heap property
         } else {
             System.out.println("Patient with value " + value + " not found.");
