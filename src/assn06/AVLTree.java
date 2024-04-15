@@ -7,7 +7,7 @@ public class AVLTree<T extends Comparable<T>> implements SelfBalancingBST<T> {
     private AVLTree<T> _right;
     private int _height;
     private int _size;
-    
+
     public AVLTree() {
         _value = null;
         _left = null;
@@ -27,9 +27,9 @@ public class AVLTree<T extends Comparable<T>> implements SelfBalancingBST<T> {
     }
 
     private AVLTree<T> rebalance() {
-        _height = Math.max(_left.height(), _right.height())+1;
+        _height = Math.max(_left.height(), _right.height()) + 1;
         int balance = balanceFactor();
-        if(balance < -1) {
+        if (balance < -1) {
             if (_right.balanceFactor() > 0) {
                 _right = this._right.rotateRight();
             }
@@ -49,43 +49,43 @@ public class AVLTree<T extends Comparable<T>> implements SelfBalancingBST<T> {
      * Rotates the tree left and returns
      * AVLTree root for rotated result.
      */
-     private AVLTree<T> rotateLeft() {
-         // You should implement left rotation and then use this 
-         // method as needed when fixing imbalances.
-         AVLTree<T> newParent = _right;
-         _right = newParent._left;
-         newParent._left = this;
+    private AVLTree<T> rotateLeft() {
+        // You should implement left rotation and then use this
+        // method as needed when fixing imbalances.
+        AVLTree<T> newParent = _right;
+        _right = newParent._left;
+        newParent._left = this;
 
-         _height = 1 + Math.max(_left.height(), _right.height());
-         _size = _left._size + _right._size + 1;
+        _height = 1 + Math.max(_left.height(), _right.height());
+        _size = _left._size + _right._size + 1;
 
-         newParent._height = Math.max(newParent._left.height(),
-                 newParent._right.height())+1;
-         newParent._size = newParent._left._size
-                 + newParent._right._size + 1;
+        newParent._height = Math.max(newParent._left.height(),
+                newParent._right.height()) + 1;
+        newParent._size = newParent._left._size
+                + newParent._right._size + 1;
 
-         return newParent;
-     }
-    
+        return newParent;
+    }
+
     /**
      * Rotates the tree right and returns
      * AVLTree root for rotated result.
      */
-     private AVLTree<T> rotateRight() {
-         // You should implement right rotation and then use this 
-         // method as needed when fixing imbalances.
-         AVLTree<T> newParent = _left;
-         _left = newParent._right;
-         newParent._right = this;
+    private AVLTree<T> rotateRight() {
+        // You should implement right rotation and then use this
+        // method as needed when fixing imbalances.
+        AVLTree<T> newParent = _left;
+        _left = newParent._right;
+        newParent._right = this;
 
-         _height = Math.max(_left.height(), _right.height())+1;
-         _size = _left._size + _right._size + 1;
+        _height = Math.max(_left.height(), _right.height()) + 1;
+        _size = _left._size + _right._size + 1;
 
-         newParent._height = Math.max(newParent._left.height(), newParent._right.height())+1;
-         newParent._size = newParent._left._size + newParent._right._size + 1;
+        newParent._height = Math.max(newParent._left.height(), newParent._right.height()) + 1;
+        newParent._size = newParent._left._size + newParent._right._size + 1;
 
-         return newParent;
-     }
+        return newParent;
+    }
 
     @Override
     public boolean isEmpty() {
@@ -110,14 +110,11 @@ public class AVLTree<T extends Comparable<T>> implements SelfBalancingBST<T> {
             _right = new AVLTree<T>();
             _size++;
             _height = Math.max(_left.height(), _right.height()) + 1;
-        }
-
-        else if(element.compareTo(getValue()) >= 0) {
+        } else if (element.compareTo(getValue()) >= 0) {
             _right = (AVLTree<T>) _right.insert(element);
             _height = Math.max(_left.height(), _right.height()) + 1;
             _size++;
-        }
-        else{
+        } else {
             _left = (AVLTree<T>) _left.insert(element);
             _height = Math.max(_left.height(), _right.height()) + 1;
             _size++;
@@ -128,7 +125,7 @@ public class AVLTree<T extends Comparable<T>> implements SelfBalancingBST<T> {
 
     @Override
     public SelfBalancingBST<T> remove(T element) {
-        if(_value == null){
+        if (_value == null) {
             return this;
         }
 
@@ -144,11 +141,9 @@ public class AVLTree<T extends Comparable<T>> implements SelfBalancingBST<T> {
                 _right = (AVLTree<T>) _right.remove(successor);
                 _value = successor;
             }
-        }
-        else if(element.compareTo(_value) < 0){
+        } else if (element.compareTo(_value) < 0) {
             _left = (AVLTree<T>) _left.remove(element);
-        }
-        else if(element.compareTo(_value) > 0) {
+        } else if (element.compareTo(_value) > 0) {
             _right = (AVLTree<T>) _right.remove(element);
         }
 
@@ -190,13 +185,9 @@ public class AVLTree<T extends Comparable<T>> implements SelfBalancingBST<T> {
 
         if (_value.compareTo(element) > 0) {
             return _left.contains(element);
-        }
-
-        else if (_value.compareTo(element) < 0) {
+        } else if (_value.compareTo(element) < 0) {
             return _right.contains(element);
-        }
-
-        else {
+        } else {
             return true;
         }
     }
@@ -207,11 +198,9 @@ public class AVLTree<T extends Comparable<T>> implements SelfBalancingBST<T> {
     public boolean rangeContain(T start, T end) {
         if (isEmpty()) {
             return false;
-        }
-
-        if (_value.compareTo(start) >= 0 && _value.compareTo(end) <= 0) {
-            boolean leftCheck = true;
-            if (_value.compareTo(start) > 0) {
+        } else if (_value.compareTo(start) >= 0 && _value.compareTo(end) <= 0) {
+            return true;
+            /* if (_value.compareTo(start) > 0) {
                 if (_left == null) {
                     leftCheck = false;
                 } else {
@@ -228,12 +217,26 @@ public class AVLTree<T extends Comparable<T>> implements SelfBalancingBST<T> {
                 }
             }
 
-            return leftCheck && rightCheck;
-        } else if (_value.compareTo(start) < 0) {
+            return leftCheck && rightCheck; */
+        } else if (_value.compareTo(start) >= 0) {
+            if (_left == null) {
+                return false;
+            } else {
+                return _left.rangeContain(start, end);
+            }
+        } else if (_value.compareTo(end) <= 0) {
+            if (_right == null) {
+                return false;
+            } else {
+                return _right.rangeContain(start, end);
+            }
+        }
+        /* else if (_value.compareTo(start) < 0) {
             return _right != null && _right.rangeContain(start, end);
         } else {
             return _left != null && _left.rangeContain(start, end);
-        }
+        } */
+        return false;
     }
 
     @Override
